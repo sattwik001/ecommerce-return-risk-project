@@ -58,12 +58,28 @@ This project analyzes sales, profit, and return risk data from an e-commerce dat
 
 
 ## 🧐 Key Insights
+  
+- 📉 *Products with more than 0.3% discount* tend to produce *negative profit*, indicating poor pricing strategies and higher return risk.
 
-- Products with >0.3% discount and negative profit may increase return risks
-- Consumer segment generated the most profit despite higher returns
-- Central region has the highest average profit margin
-- Return Risk increases where discount exceeds 25%
+- 📊 Among segments:
+  - *Consumer segment* generates the highest sales and profit but also has higher return risks.
+  - *Corporate segment* performs steadily with moderate profit and lower returns.
 
+- 🌍 *West region* contributes the *highest profit (~108K)* among all regions, followed by Central and South.
+
+- 📅 *Sales trend* shows consistent growth with seasonal spikes around *September to December*, indicating high performance in Q3 & Q4.
+
+- 💸 *Total Loss* from return-prone or discounted items is significant (~156K), and 1,871 orders have resulted in loss.
+
+- 🧾 *Return Risk* is highly correlated with *discount rate. When discount crosses **25%*, average profit starts decreasing sharply and risk increases.
+
+- 📈 *2014* was the *best performing year* in both sales and profit, showing strong year-on-year growth.
+
+- 🔁 *High shipment delays* (not shown in dashboard but inferred from SQL) may also contribute to returns — further investigation can be done.
+
+- 📦 More than *9,994 orders* were processed in total, showing a large and rich dataset for analysis.
+
+  
 
 
 ## 👤 Author
