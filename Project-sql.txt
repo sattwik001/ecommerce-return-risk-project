@@ -1,0 +1,104 @@
+create database obo;
+use obo;
+
+show tables;
+
+CREATE TABLE ecommerce_data (
+    Order_Id VARCHAR(50),
+    Year INT,
+    Order_Date DATE,
+    Ship_Date DATE,
+    Shipment_days INT,
+    Ship_Mode VARCHAR(50),
+    Customer_ID VARCHAR(50),
+    Customer_Name VARCHAR(100),
+    Segment VARCHAR(50),
+    Country VARCHAR(50),
+    City VARCHAR(50),
+    State VARCHAR(50),
+    Postal_Code VARCHAR(20),
+    Region VARCHAR(50),
+    Product_ID VARCHAR(50),
+    Category VARCHAR(50),
+    Sub_Category VARCHAR(50),
+    Product_Name VARCHAR(200),
+    Sales FLOAT,
+    Quantity INT,
+    Discount FLOAT,
+    Profit FLOAT,
+    Return_Risk VARCHAR(50)
+);
+
+
+
+SELECT * 
+FROM ecommerce_data;
+--- LIMIT 10;
+
+
+
+-- Count how many rows have missing Order_Date
+SELECT COUNT(*) AS Null_Order_Date_Count
+FROM ecommerce_data 
+WHERE Order_Date IS NULL;
+
+
+
+-- top 10 best-selling products based on sales
+SELECT Product_Name, 
+       SUM(Sales) AS Total_Sales
+FROM ecommerce_data
+GROUP BY Product_Name
+ORDER BY Total_Sales DESC
+LIMIT 10;
+
+
+
+
+-- Calculate total profit from each region
+SELECT Region, 
+       SUM(Profit) AS Total_Profit
+FROM ecommerce_data
+GROUP BY Region;
+
+
+
+
+-- Summarize orders, avg discount & profit for each return risk level
+SELECT Return_Risk, 
+       COUNT(*) AS Total_Orders,
+       AVG(Discount) AS Avg_Discount, 
+       AVG(Profit) AS Avg_Profit
+FROM ecommerce_data
+GROUP BY Return_Risk;
+
+
+
+
+
+-- Monthly sales trend using order date
+SELECT DATE_FORMAT(Order_Date, '%Y-%m') AS Month, 
+       SUM(Sales) AS Monthly_Sales
+FROM ecommerce_data
+GROUP BY Month
+ORDER BY Month;
+
+
+
+
+-- Top 10 Months with Highest Total Sales
+SELECT DATE_FORMAT(Order_Date, '%Y-%m') AS Month,
+       SUM(Sales) AS Monthly_Sales
+FROM ecommerce_data
+GROUP BY Month
+ORDER BY Monthly_Sales DESC
+LIMIT 10;
+
+
+
+
+-- Show products with high discount (>30%) but negative profit
+SELECT Product_Name, Discount, Profit, Category
+FROM ecommerce_data
+WHERE Profit < 0 AND Discount > 0.30
+ORDER BY Profit ASC;
